@@ -1,7 +1,6 @@
 package ru.stqa.pft.addressbook.model;
 
 public class ContactData {
-    private final String testName;
     private final String testFirstName;
     private final String testMiddleName;
     private final String testLastName;
@@ -18,13 +17,14 @@ public class ContactData {
     private final String testSecHome;
     private final String testSecNotes;
     private final String group;
+    private int id;
 
-    public ContactData(String testName, String testFirstName, String testMiddleName,
+
+    public ContactData(int id, String testFirstName, String testMiddleName,
                        String testLastName, String testNickName, String testTitle,
                        String testCompany, String testAddress, String testHome, String testMobile, String testWork,
                        String testFax, String testEmail, String testSecAddress, String testSecHome, String testSecNotes,
                        String group) {
-        this.testName = testName;
         this.testFirstName = testFirstName;
         this.testMiddleName = testMiddleName;
         this.testLastName = testLastName;
@@ -41,10 +41,62 @@ public class ContactData {
         this.testSecHome = testSecHome;
         this.testSecNotes = testSecNotes;
         this.group = group;
+        this.id = id;
     }
 
-    public String getTestName() {
-        return testName;
+    public ContactData(String testFirstName, String testMiddleName,
+                       String testLastName, String testNickName, String testTitle,
+                       String testCompany, String testAddress, String testHome, String testMobile, String testWork,
+                       String testFax, String testEmail, String testSecAddress, String testSecHome, String testSecNotes,
+                       String group) {
+        this.testFirstName = testFirstName;
+        this.testMiddleName = testMiddleName;
+        this.testLastName = testLastName;
+        this.testNickName = testNickName;
+        this.testTitle = testTitle;
+        this.testCompany = testCompany;
+        this.testAddress = testAddress;
+        this.testHome = testHome;
+        this.testMobile = testMobile;
+        this.testWork = testWork;
+        this.testFax = testFax;
+        this.testEmail = testEmail;
+        this.testSecAddress = testSecAddress;
+        this.testSecHome = testSecHome;
+        this.testSecNotes = testSecNotes;
+        this.group = group;
+        this.id = Integer.MAX_VALUE;
+    }
+
+    @Override
+    public String toString() {
+        return "ContactData{" +
+                "testLastName='" + testLastName + '\'' +
+                ", id='" + id + '\'' +
+                '}';
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ContactData that = (ContactData) o;
+
+        return testLastName != null ? testLastName.equals(that.testLastName) : that.testLastName == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return testLastName != null ? testLastName.hashCode() : 0;
     }
 
     public String getTestFirstName() {
