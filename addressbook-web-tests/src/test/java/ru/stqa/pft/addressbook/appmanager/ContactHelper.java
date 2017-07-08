@@ -17,7 +17,6 @@ public class ContactHelper extends HelperBase {
 
     public ContactHelper(WebDriver wd) {
         super(wd);
-
     }
 
     public void selectContact(int index) {
@@ -72,10 +71,6 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
     }
 
-    public boolean isThereAContact() {
-        return isElementPresent(By.name("selected[]"));
-    }
-
     public void createContact(ContactData contactData, Boolean creation) {
         initContactCreation();
         fillContactForm(contactData, creation);
@@ -83,11 +78,7 @@ public class ContactHelper extends HelperBase {
         returnToContactPage();
     }
 
-    public int getContactCount() {
-        return wd.findElements(By.name("selected[]")).size();
-    }
-
-    public List<ContactData> getContactList() {
+    public List<ContactData> list() {
         List<ContactData> contacts = new ArrayList<ContactData>();
         List<WebElement> elements = wd.findElements(By.xpath("//*[@id=\"maintable\"]/tbody/tr"));
         elements.remove(0);
@@ -95,12 +86,23 @@ public class ContactHelper extends HelperBase {
             String lastName = element.findElements(By.tagName("td")).get(1).getText();
             String firstName = element.findElements(By.tagName("td")).get(2).getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            //System.out.println(name);
-            ContactData contact = new ContactData(id, firstName, null, lastName,
-                    null, null, null, null, null, null,
-                    null, null, null, null, null, null, null);
+            ContactData contact = new ContactData().withId(id).withTestFirstName(firstName).withTestLastName(lastName);
             contacts.add(contact);
         }
         return contacts;
+    }
+
+    public void modify(int index, ContactData contact) {
+        selectContact(index);
+        initContactModification();
+        fillContactForm(contact, false);
+        submitContactModification();
+        returnToContactPage();
+    }
+
+    public void delete(int index) {
+        selectContact(index);
+        deleteSelectedContacts();
+        returnToContactPage();
     }
 }

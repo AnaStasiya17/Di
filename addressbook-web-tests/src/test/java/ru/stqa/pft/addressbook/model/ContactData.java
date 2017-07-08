@@ -1,71 +1,172 @@
 package ru.stqa.pft.addressbook.model;
 
 public class ContactData {
-    private final String testFirstName;
-    private final String testMiddleName;
-    private final String testLastName;
-    private final String testNickName;
-    private final String testTitle;
-    private final String testCompany;
-    private final String testAddress;
-    private final String testHome;
-    private final String testMobile;
-    private final String testWork;
-    private final String testFax;
-    private final String testEmail;
-    private final String testSecAddress;
-    private final String testSecHome;
-    private final String testSecNotes;
-    private final String group;
-    private int id;
+    private String testFirstName;
+    private String testMiddleName;
+    private String testLastName;
+    private String testNickName;
+    private String testTitle;
+    private String testCompany;
+    private String testAddress;
+    private String testHome;
+    private String testMobile;
+    private String testWork;
+    private String testFax;
+    private String testEmail;
+    private String testSecAddress;
+    private String testSecHome;
+    private String testSecNotes;
+    private String group;
+    private int id = Integer.MAX_VALUE;
 
-
-    public ContactData(int id, String testFirstName, String testMiddleName,
-                       String testLastName, String testNickName, String testTitle,
-                       String testCompany, String testAddress, String testHome, String testMobile, String testWork,
-                       String testFax, String testEmail, String testSecAddress, String testSecHome, String testSecNotes,
-                       String group) {
+    public ContactData withTestFirstName(String testFirstName) {
         this.testFirstName = testFirstName;
-        this.testMiddleName = testMiddleName;
-        this.testLastName = testLastName;
-        this.testNickName = testNickName;
-        this.testTitle = testTitle;
-        this.testCompany = testCompany;
-        this.testAddress = testAddress;
-        this.testHome = testHome;
-        this.testMobile = testMobile;
-        this.testWork = testWork;
-        this.testFax = testFax;
-        this.testEmail = testEmail;
-        this.testSecAddress = testSecAddress;
-        this.testSecHome = testSecHome;
-        this.testSecNotes = testSecNotes;
-        this.group = group;
-        this.id = id;
+        return this;
     }
 
-    public ContactData(String testFirstName, String testMiddleName,
-                       String testLastName, String testNickName, String testTitle,
-                       String testCompany, String testAddress, String testHome, String testMobile, String testWork,
-                       String testFax, String testEmail, String testSecAddress, String testSecHome, String testSecNotes,
-                       String group) {
-        this.testFirstName = testFirstName;
+    public ContactData withTestMiddleName(String testMiddleName) {
         this.testMiddleName = testMiddleName;
+        return this;
+    }
+
+    public ContactData withTestLastName(String testLastName) {
         this.testLastName = testLastName;
+        return this;
+    }
+
+    public ContactData withTestNickName(String testNickName) {
         this.testNickName = testNickName;
+        return this;
+    }
+
+    public ContactData withTestTitle(String testTitle) {
         this.testTitle = testTitle;
+        return this;
+    }
+
+    public ContactData withTestCompany(String testCompany) {
         this.testCompany = testCompany;
+        return this;
+    }
+
+    public ContactData withTestAddress(String testAddress) {
         this.testAddress = testAddress;
+        return this;
+    }
+
+    public ContactData withTestHome(String testHome) {
         this.testHome = testHome;
+        return this;
+    }
+
+    public ContactData withTestMobile(String testMobile) {
         this.testMobile = testMobile;
+        return this;
+    }
+
+    public ContactData withTestWork(String testWork) {
         this.testWork = testWork;
+        return this;
+    }
+
+    public ContactData withTestFax(String testFax) {
         this.testFax = testFax;
+        return this;
+    }
+
+    public ContactData withTestEmail(String testEmail) {
         this.testEmail = testEmail;
+        return this;
+    }
+
+    public ContactData withTestSecAddress(String testSecAddress) {
         this.testSecAddress = testSecAddress;
+        return this;
+    }
+
+    public ContactData withTestSecHome(String testSecHome) {
         this.testSecHome = testSecHome;
+        return this;
+    }
+
+    public ContactData withTestSecNotes(String testSecNotes) {
         this.testSecNotes = testSecNotes;
+        return this;
+    }
+
+    public ContactData withGroup(String group) {
         this.group = group;
-        this.id = Integer.MAX_VALUE;
+        return this;
+    }
+
+    public ContactData withId(int id) {
+        this.id = id;
+        return this;
+    }
+
+    public int getId() {
+        return id;
+    }
+    public String getTestFirstName() {
+        return testFirstName;
+    }
+    public String getTestMiddleName() {
+        return testMiddleName;
+    }
+    public String getTestLastName() {
+        return testLastName;
+    }
+    public String getTestNickName() {
+        return testNickName;
+    }
+    public String getTestTitle() {
+        return testTitle;
+    }
+    public String getTestCompany() {
+        return testCompany;
+    }
+    public String getTestAddress() {
+        return testAddress;
+    }
+    public String getTestHome() {
+        return testHome;
+    }
+    public String getTestMobile() {
+        return testMobile;
+    }
+    public String getTestWork() {
+        return testWork;
+    }
+    public String getTestFax() {
+        return testFax;
+    }
+    public String getTestEmail() {
+        return testEmail;
+    }
+    public String getTestSecAddress() {
+        return testSecAddress;
+    }
+    public String getTestSecHome() {
+        return testSecHome;
+    }
+    public String getTestSecNotes() {
+        return testSecNotes;
+    }
+    public String getGroup() {
+        return group;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ContactData that = (ContactData) o;
+        return testLastName != null ? testLastName.equals(that.testLastName) : that.testLastName == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return testLastName != null ? testLastName.hashCode() : 0;
     }
 
     @Override
@@ -76,90 +177,4 @@ public class ContactData {
                 '}';
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        ContactData that = (ContactData) o;
-
-        return testLastName != null ? testLastName.equals(that.testLastName) : that.testLastName == null;
-    }
-
-    @Override
-    public int hashCode() {
-        return testLastName != null ? testLastName.hashCode() : 0;
-    }
-
-    public String getTestFirstName() {
-        return testFirstName;
-    }
-
-    public String getTestMiddleName() {
-        return testMiddleName;
-    }
-
-    public String getTestLastName() {
-        return testLastName;
-    }
-
-    public String getTestNickName() {
-        return testNickName;
-    }
-
-    public String getTestTitle() {
-        return testTitle;
-    }
-
-    public String getTestCompany() {
-        return testCompany;
-    }
-
-    public String getTestAddress() {
-        return testAddress;
-    }
-
-    public String getTestHome() {
-        return testHome;
-    }
-
-    public String getTestMobile() {
-        return testMobile;
-    }
-
-    public String getTestWork() {
-        return testWork;
-    }
-
-    public String getTestFax() {
-        return testFax;
-    }
-
-    public String getTestEmail() {
-        return testEmail;
-    }
-
-    public String getTestSecAddress() {
-        return testSecAddress;
-    }
-
-    public String getTestSecHome() {
-        return testSecHome;
-    }
-
-    public String getTestSecNotes() {
-        return testSecNotes;
-    }
-
-    public String getGroup() {
-        return group;
-    }
 }
