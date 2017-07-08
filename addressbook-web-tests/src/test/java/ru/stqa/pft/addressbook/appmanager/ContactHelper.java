@@ -16,8 +16,10 @@ public class ContactHelper extends HelperBase{
 
     }
 
-    public void deleteSelectedContacts() {
+    public void selectContact() {
         click(By.name("selected[]"));
+    }
+    public void deleteSelectedContacts() {
         click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
         clickOnAlert();
     }
@@ -49,6 +51,10 @@ public class ContactHelper extends HelperBase{
     }
 
     public void initContactCreation() {
-        wd.findElement(By.name("new")).click();
+        wd.findElement(By.linkText("add new")).click();
+    }
+
+    public void initContactModification() {
+        click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
     }
 }
