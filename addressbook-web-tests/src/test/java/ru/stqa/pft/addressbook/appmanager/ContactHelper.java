@@ -6,9 +6,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.Contacts;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Dmitriy on 04.07.2017.
@@ -17,10 +19,6 @@ public class ContactHelper extends HelperBase {
 
     public ContactHelper(WebDriver wd) {
         super(wd);
-    }
-
-    public void selectContact(int index) {
-        wd.findElements(By.name("selected[]")).get(index).click();
     }
 
     public void deleteSelectedContacts() {
@@ -78,8 +76,26 @@ public class ContactHelper extends HelperBase {
         returnToContactPage();
     }
 
-    public List<ContactData> list() {
-        List<ContactData> contacts = new ArrayList<ContactData>();
+    public void modify(ContactData contact) {
+        selectContactById(contact.getId());
+        initContactModification();
+        fillContactForm(contact, false);
+        submitContactModification();
+        returnToContactPage();
+    }
+
+    public void selectContactById(int id) {
+        wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
+    }
+
+    public void delete(ContactData contact) {
+        selectContactById(contact.getId());
+        deleteSelectedContacts();
+        returnToContactPage();
+    }
+
+    public Contacts all() {
+        Contacts contacts = new Contacts();
         List<WebElement> elements = wd.findElements(By.xpath("//*[@id=\"maintable\"]/tbody/tr"));
         elements.remove(0);
         for (WebElement element : elements) {
@@ -90,19 +106,5 @@ public class ContactHelper extends HelperBase {
             contacts.add(contact);
         }
         return contacts;
-    }
-
-    public void modify(int index, ContactData contact) {
-        selectContact(index);
-        initContactModification();
-        fillContactForm(contact, false);
-        submitContactModification();
-        returnToContactPage();
-    }
-
-    public void delete(int index) {
-        selectContact(index);
-        deleteSelectedContacts();
-        returnToContactPage();
     }
 }

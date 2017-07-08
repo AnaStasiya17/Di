@@ -107,66 +107,69 @@ public class ContactData {
     public int getId() {
         return id;
     }
+
     public String getTestFirstName() {
         return testFirstName;
     }
+
     public String getTestMiddleName() {
         return testMiddleName;
     }
+
     public String getTestLastName() {
         return testLastName;
     }
+
     public String getTestNickName() {
         return testNickName;
     }
+
     public String getTestTitle() {
         return testTitle;
     }
+
     public String getTestCompany() {
         return testCompany;
     }
+
     public String getTestAddress() {
         return testAddress;
     }
+
     public String getTestHome() {
         return testHome;
     }
+
     public String getTestMobile() {
         return testMobile;
     }
+
     public String getTestWork() {
         return testWork;
     }
+
     public String getTestFax() {
         return testFax;
     }
+
     public String getTestEmail() {
         return testEmail;
     }
+
     public String getTestSecAddress() {
         return testSecAddress;
     }
+
     public String getTestSecHome() {
         return testSecHome;
     }
+
     public String getTestSecNotes() {
         return testSecNotes;
     }
+
     public String getGroup() {
         return group;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ContactData that = (ContactData) o;
-        return testLastName != null ? testLastName.equals(that.testLastName) : that.testLastName == null;
-    }
-
-    @Override
-    public int hashCode() {
-        return testLastName != null ? testLastName.hashCode() : 0;
     }
 
     @Override
@@ -177,4 +180,24 @@ public class ContactData {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ContactData that = (ContactData) o;
+
+        if (id != that.id) return false;
+        if (testFirstName != null ? !testFirstName.equals(that.testFirstName) : that.testFirstName != null)
+            return false;
+        return testLastName != null ? testLastName.equals(that.testLastName) : that.testLastName == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = testFirstName != null ? testFirstName.hashCode() : 0;
+        result = 31 * result + (testLastName != null ? testLastName.hashCode() : 0);
+        result = 31 * result + id;
+        return result;
+    }
 }
