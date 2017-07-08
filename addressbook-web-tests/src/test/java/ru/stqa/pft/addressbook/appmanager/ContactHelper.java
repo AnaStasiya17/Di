@@ -1,16 +1,15 @@
 package ru.stqa.pft.addressbook.appmanager;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
 import ru.stqa.pft.addressbook.model.ContactData;
-import ru.stqa.pft.addressbook.model.GroupData;
 
 /**
  * Created by Dmitriy on 04.07.2017.
  */
-public class ContactHelper extends HelperBase{
+public class ContactHelper extends HelperBase {
 
     public ContactHelper(WebDriver wd) {
         super(wd);
@@ -20,6 +19,7 @@ public class ContactHelper extends HelperBase{
     public void selectContact() {
         click(By.name("selected[]"));
     }
+
     public void deleteSelectedContacts() {
         click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
         clickOnAlert();
@@ -33,7 +33,11 @@ public class ContactHelper extends HelperBase{
         wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
     }
 
-    public void fillContactForm(ContactData contactData) {
+    public void submitContactModification() {
+        wd.findElement(By.xpath("//div[@id='content']/form[1]/input[22]")).click();
+    }
+
+    public void fillContactForm(ContactData contactData, boolean creation) {
         type(By.name("firstname"), contactData.getTestFirstName());
         type(By.name("middlename"), contactData.getTestMiddleName());
         type(By.name("lastname"), contactData.getTestLastName());
@@ -49,6 +53,11 @@ public class ContactHelper extends HelperBase{
         type(By.name("address2"), contactData.getTestSecAddress());
         type(By.name("phone2"), contactData.getTestSecHome());
         type(By.name("notes"), contactData.getTestSecNotes());
+        if (creation) {
+            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+        } else {
+            Assert.assertFalse(isElementPresent(By.name("new_group")));
+        }
     }
 
     public void initContactCreation() {
@@ -57,5 +66,16 @@ public class ContactHelper extends HelperBase{
 
     public void initContactModification() {
         click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+    }
+
+    public boolean isThereAContact() {
+        return  isElementPresent(By.name("selected[]"));
+    }
+
+    public void createContact(ContactData contactData, Boolean creation) {
+        initContactCreation();
+        fillContactForm(contactData, creation);
+        submitContactCreation();
+        returnToContactPage();
     }
 }
